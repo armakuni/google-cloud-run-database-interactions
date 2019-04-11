@@ -1,0 +1,14 @@
+{
+    "name": "purplebooth/counter",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Billie Thompson",
+            "email": "billie@billiecodes.com"
+        }
+    ],
+    "require": {
+        "google/cloud-datastore": "^1.9",
+        "opencensus/opencensus-exporter-stackdriver": "^0.1.0"
+    }
+}
