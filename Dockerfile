@@ -16,6 +16,9 @@ RUN apk --no-cache add alpine-sdk autoconf zlib-dev zlib \
   && docker-php-ext-enable grpc \
   && apk del alpine-sdk autoconf zlib-dev
 
+## Enable Opcache
+RUN docker-php-ext-enable opcache
+
 ## Enable Opencensus Extension
 COPY --from=opencensus /extension/ext/modules/opencensus.so /usr/local/lib/php/extensions/no-debug-non-zts-20180731/opencensus.so
 RUN docker-php-ext-enable opencensus
@@ -39,6 +42,9 @@ RUN apt-get update \
   && apt-get remove -y zlib1g-dev \
   && rm -rf /var/cache/apt/ \
   && docker-php-ext-enable grpc
+
+## Enable Opcache
+RUN docker-php-ext-enable opcache
 
 ## Enable Opencensus Extension
 COPY --from=opencensus /extension/ext/modules/opencensus.so /usr/local/lib/php/extensions/no-debug-non-zts-20180731/opencensus.so
