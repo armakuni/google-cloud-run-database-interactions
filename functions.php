@@ -43,23 +43,19 @@ function createStackDriverExporter(array $googleConfig): StackdriverExporter
 
 /**
  * @param DatastoreClient $datastore
+ * @return int
  */
-function incrementCounter(DatastoreClient $datastore): void
+function incrementCounter(DatastoreClient $datastore): int
 {
-    $taskKey = $datastore->key('Counter', 1);
-    $transaction = $datastore->transaction();
-    $counter = $transaction->lookup($taskKey);
-    $current = 0;
+    $counterKey = $datastore->key('Counter');
+    $counterKey = $datastore->allocateId($counterKey);
+    $counter = $datastore->entity($counterKey, []);
+    $datastore->upsert($counter);
+    $query = $datastore->query()
+        ->keysOnly();
+    $results = $datastore->runQuery($query);
 
-    if ($counter !== null) {
-        $current = $counter['counter'] + 1;
-    }
-
-    $counter = $datastore->entity($taskKey, ["counter" => $current]);
-    $transaction->upsert($counter);
-    $transaction->commit();
-
-    echo $counter['counter'];
+    return iterator_count($results);
 }
 
 /**

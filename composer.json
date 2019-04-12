@@ -9,6 +9,7 @@
     ],
     "require": {
         "google/cloud-datastore": "^1.9",
-        "opencensus/opencensus-exporter-stackdriver": "^0.1.0"
+        "opencensus/opencensus-exporter-stackdriver": "^0.1.0",
+        "php" : "^7.3"
     }
 }
