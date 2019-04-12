@@ -34,9 +34,10 @@ function createStackDriverExporter(array $googleConfig): StackdriverExporter
 {
     $exporter = new StackdriverExporter(
         [
-            'clientConfig' => $googleConfig
+            'clientConfig' => $googleConfig,
         ]
     );
+
     return $exporter;
 }
 
